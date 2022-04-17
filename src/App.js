@@ -1,58 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useEffect } from 'react'
+import logo from './logo.svg'
+import { Counter } from './features/counter/Counter'
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import Login from './Login'
+import {
+  BrowserRouter as Router,
+  Routes as Switch,
+  Route,
+} from "react-router-dom";
+import Todo from './Todo'
+import Baner from './Header'
+import { useDispatch } from 'react-redux'
+import { dataAction, dateAction, loginAction, logoutAction } from './actions';
+import firebase from 'firebase/compat/app';
+import Register from './Register'
 
-function App() {
+function App () {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    
+
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        dispatch(
+          dataAction({ name: user.displayName, url: user.photoURL, email: user.email, uid: user.uid })
+        )
+        dispatch(loginAction())
+      //  let date = new Date();
+      //  dispatch(dateAction({day : date.getDate(), month: date.getMonth(), year: date.getFullYear(),fullDate: `${date.getDate()}${date.getMonth()}${date.getFullYear()}` }))
+        
+      } else {
+        dispatch(logoutAction())
+
+        dispatch(
+          dataAction({ name: null, url: null, email: null, uid: "0" })
+        )
+     //   dispatch(dateAction({day: null, month: null, year: null, fullDate: null}))
+        
+      }
+    })
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+    <Router>
+      <Baner></Baner>
+        <Switch>
+          <Route path ="/todo/:uid" element={<Todo/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
+        </Switch>
+    </Router>
+  )
 }
 
-export default App;
+export default App

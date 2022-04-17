@@ -1,0 +1,110 @@
+.flex{
+    display: flex;
+}
+
+.todo{
+    min-width: 400px;
+    width: 600px;
+    background-color: #000c18;
+    min-height: 46vh;
+    border-radius: 10px;
+    padding-bottom: 20px;
+    margin: auto;
+}
+.todo__title{
+    font-size: 30px;
+    text-align: center;
+    padding: 20px 0 0 0;
+    font-weight: 600;
+    color: white;
+}
+.todo__add{
+    padding: 20px 50px;
+ display: flex;
+
+}
+.todo__add__input{
+ background-color: transparent;
+ padding: 0 20px;
+ border: 1px solid #5c3080;
+ width: 80%
+
+}
+.todo__add__input> input{
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 10px 0;
+    font-size: 20px;
+    background-color: transparent;
+    color: white;
+}
+.todo__add__input> input::placeholder{
+    color: white;
+    opacity: 0.8;
+}
+
+.button-add{
+    border-radius: 0;
+    background-color: #5c3080;
+    color: white;
+}
+
+
+.todo__task{
+    display:flex;
+    justify-content: space-between;
+    background-color: rgb(255, 0, 55);
+    width: 92%;
+    margin: auto;
+    padding: 12px 7px 12px 17px;
+    border-radius: 6px;
+    color: white;
+    margin-top: 7px;
+    transition: 0.2s background-color;
+    user-select: none;
+    min-height: 50px;
+    
+}
+.todo__task__name{
+    color: white;
+    font-size: 20px; 
+    width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.todo__task input{
+    background-color: transparent;
+    width: 80%;
+    border: none;
+    padding: 0;
+}
+.todo__task__icons{
+    margin-right: 10px;
+}
+.todo__task__icons:hover{
+    cursor: pointer;
+}
+
+.button-export{
+    background-color: rgb(84, 30, 146);
+    color: white;
+    font-weight: 600;
+    }
+
+.button-export--position{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+}
+
+.expand{
+    overflow-wrap: break-word !important;
+    white-space: break-spaces !important;
+}
+
+.todo__task__name:hover{
+    cursor: pointer;
+}
