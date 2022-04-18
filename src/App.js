@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux'
 import { dataAction, dateAction, loginAction, logoutAction } from './actions';
 import firebase from 'firebase/compat/app';
 import Register from './Register'
+import Contact from './Contact'
 
 function App () {
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ function App () {
           <Route path ="/todo/:uid" element={<Todo/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
+          <Route path="/contact" element={<Contact/>}/>
         </Switch>
     </Router>
   )

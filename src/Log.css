@@ -43,6 +43,7 @@ input{
     border-radius: 55px;
     margin: 0 auto;
     padding: 10px 30px;
+    user-select: none;
 }
 
 .button-login{

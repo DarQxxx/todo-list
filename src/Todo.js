@@ -58,6 +58,7 @@ function updateList () {
 if (userProps.uid !== "0" && isLogged ){
   return (
     <div className="bg body">
+
         <div className="container">
             <div className="todo">
                 <div className="todo__title">Co dzisiaj planujesz zrobić?</div>

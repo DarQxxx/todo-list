@@ -1,0 +1,96 @@
+
+
+.contact{
+width: 600px;
+margin: auto;
+background-color: white;
+min-height: 500px;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+.contact__form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+    height: 100%;
+}
+
+.contact__form__title{
+    margin: 40px auto 20px auto;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 36px;
+    text-align: center;
+}
+.contact_form_email{
+    font-size: 20px;
+    border: 1px solid rgb(138, 138, 138);
+    margin: 5px 0 20px 0;
+    padding: 5px 10px;
+    width: 100%;
+}
+.contact_form_email::placeholder, .contact__form__message::placeholder{
+    user-select: none;
+}
+
+
+.contact__form__message{
+    margin-top: 5px;
+    outline: none;
+    border-bottom: 1px solid rgb(138, 138, 138);
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.label{
+    font-weight: 600;
+    user-select: none;
+}
+
+
+input{
+    outline: none;
+    border:none;
+    border-bottom: 1px solid rgb(138, 138, 138);
+}
+
+.button{
+    border: none;
+    outline: none;
+    border-radius: 55px;
+    margin: 0 auto;
+    padding: 10px 30px;
+}
+
+.mb-15{
+    margin-bottom: 15px;
+}
+
+.form__validation{
+    position: relative;
+}
+
+.validate{
+    position: absolute;
+    bottom: 3px;
+    font-size: 10px;
+    color: red;
+    left: 2px;
+}
+.validate--color{
+    color: red;
+}
+
+.validate--border{
+    border: 1px solid red !important;
+
+}
+.validate--display{
+    display: none;
+}
+
+.pdb-30{
+    padding-bottom: 30px;
+}
