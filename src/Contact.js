@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Contact.css'
 import emailjs from 'emailjs-com'
 
@@ -9,6 +9,7 @@ export default function Contact () {
   const [validate, setValidate] = useState(false)
   const [validate2, setValidate2] = useState(false)
   const [validate3, setValidate3] = useState(false)
+  const [succes, setSucces] = useState(false)
 
   function handleSubmit (e) {
     e.preventDefault()
@@ -26,6 +27,10 @@ export default function Contact () {
         )
         .then(res => {
           console.log(res)
+          setSucces(true);
+          validation.current.value = '';
+          validation2.current.value = '';
+          validation3.current.value = '';
         })
         .catch(err => console.log(err))
 
@@ -41,11 +46,14 @@ export default function Contact () {
         })
         .catch(err => console.log(err))
     }
+    else { 
+      setSucces(false);
+    }
 
 
     if (validation.current.value === '') {
       setValidate(true)
-      console.log(validate)
+      
     }
     if (validation2.current.value === '') {
       setValidate2(true)
@@ -56,6 +64,7 @@ export default function Contact () {
   }
 
   function handleChange (e) {
+    setSucces(false);
     if (e.target.name === 'name') {
       setValidate(false)
     } else if (e.target.name === 'email') {
@@ -64,6 +73,8 @@ export default function Contact () {
       setValidate3(false)
     }
   }
+
+  
 
   return (
     <div className='body bg'>
@@ -74,6 +85,7 @@ export default function Contact () {
               Widzisz jakiś błąd, albo masz pytanie? Uzupełnij formularz i
               skontaktuj się
             </div>
+            {succes && <div className="contact__form__success">Twoja wiadomość zosała przesłana</div>}
             <div className={`label ${validate && 'validate--color'}`}>Imię</div>
             <div className='form__validation'>
               <input

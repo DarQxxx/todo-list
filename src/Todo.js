@@ -4,7 +4,8 @@ import "./Todo.css"
 import "./Log.css"
 import { getAnything, time } from './firebase';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
+import {  db } from './firebase'
 
 export default function Todo() {
   const [taskList, setTaskList] = useState(null);
@@ -12,7 +13,8 @@ export default function Todo() {
   const isLogged = useSelector(state => state.isLogged)
   const userProps = useSelector(state => state.userData)
   const inputClear = useRef(null);
-
+  const params = useParams();
+  const [actualUser, setActualUser] = useState("");
 
 
   function handleSubmit(e){
@@ -36,36 +38,54 @@ export default function Todo() {
 
   }
 
-function updateList () {
-      getAnything(userProps.uid).onSnapshot(querySnapshot => {
+
+
+  useEffect(() => {
+    const updateList =  
+      getAnything(params.uid).onSnapshot(querySnapshot => {
       const items = []
       querySnapshot.forEach(doc => {
         items.push(doc.data())
       })
       setTaskList(items)
     })
-  }
 
-  useEffect(() => {
-    updateList();
+
+
+    const updateUser =  
+    getAnything("users").onSnapshot(querySnapshot => {
+    querySnapshot.forEach(doc => {
+      if(doc.data().uid === params.uid){
+      setActualUser(doc.data().name)
+        
+      }
+    })
+  })
+
   
     return () => {
       updateList();
+      updateUser();
     }
-  }, [])
+  }, [params.uid])
+
+
+
+
 
   
-if (userProps.uid !== "0" && isLogged ){
+if (userProps.uid !== "0" && isLogged && userProps.name !== null ){
   return (
     <div className="bg body">
 
         <div className="container">
+
             <div className="todo">
-                <div className="todo__title">Co dzisiaj planujesz zrobić?</div>
-                <form onSubmit={handleSubmit} className="todo__add">
+            {userProps.uid === params.uid ?<div className="todo__title">Co dzisiaj planujesz zrobić?</div> : <div className="todo__title">Przeglądarz terminarz użytkownika:</div>}
+                {userProps.uid === params.uid ? <form onSubmit={handleSubmit} className="todo__add">
                     <div className="todo__add__input"><input type="text" placeholder="Dodaj zadanie" onChange={handleChange} ref={inputClear}></input></div>
                     <button className="button button-add" type="submit">Dodaj</button>
-                </form>
+                </form> : <div className="todo__add--height todo__title todo__title--nowrap">{actualUser}</div>}
                 {taskList !== null && taskList.map((task, index) => (
                     task.visible === true  && <Task task={task.task} id={task.id} status={task.status} key={index}></Task>
 
@@ -74,7 +94,7 @@ if (userProps.uid !== "0" && isLogged ){
 
             </div>
         </div>
-        <div className="button button-export button-export--position">Export to PDF</div>
+        {/*<div className="button button-export button-export--position">Export to PDF</div>*/}
     </div>
   )}
   else

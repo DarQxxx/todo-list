@@ -11,13 +11,20 @@ import {
 } from "react-router-dom";
 import Todo from './Todo'
 import Baner from './Header'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { dataAction, dateAction, loginAction, logoutAction } from './actions';
 import firebase from 'firebase/compat/app';
 import Register from './Register'
 import Contact from './Contact'
+import LeftNav from './LeftNav'
+import Settings from './Settings'
+import RightNav from './RightNav'
+import "./App.css"
 
 function App () {
+  const isLogged = useSelector(state => state.isLogged)
+  const userProps = useSelector(state => state.userData)
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,6 +33,7 @@ function App () {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        console.log(user)
         dispatch(
           dataAction({ name: user.displayName, url: user.photoURL, email: user.email, uid: user.uid })
         )
@@ -48,12 +56,18 @@ function App () {
   return (
     <Router>
       <Baner></Baner>
+      <div className="flex justify-between">      
+      <LeftNav/>
         <Switch>
-          <Route path ="/todo/:uid" element={<Todo/>}/>
+          <Route path ="/:uid" element={<Todo/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/settings" element={<Settings/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/contact" element={<Contact/>}/>
         </Switch>
+        <RightNav/>
+        </div>
+
     </Router>
   )
 }

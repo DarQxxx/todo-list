@@ -1,0 +1,114 @@
+.leftNav, .rightNav{
+    max-width: 205px;
+    min-width: 205px;
+    background-color:rgb(243, 243, 243) ;
+    flex:1;
+}
+
+.leftNav__profile{
+    display: flex;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.leftNav__img{
+width: 45px;
+height: 45px;
+border-radius: 50%;
+margin: 10px;
+}
+
+.leftNav__name{
+ text-align: center;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ font-weight: 600;
+ line-height: 18px;
+ white-space: nowrap;
+ font-size: 15px;
+}
+.leftNav__nav{
+    display: flex;
+    font-size: 19px;
+    align-items: center;
+    width: 100%;
+    padding: 15px 20px;
+}
+
+.leftNav__icon{
+    padding-right: 20px;
+}
+
+.leftNav__nav:hover{
+    background-color: rgb(215, 215, 215);
+
+}
+
+.rightNav__list:first-child{
+    border-top: none;
+}
+
+.rightNav__list{
+    display: flex;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+    border-top: 1px solid rgb(214, 214, 214);
+}
+
+.rightNav__profile{
+    padding-top: 30px;
+    min-height: 100vh;
+
+}
+
+.rightNav__list:hover{
+    background-color: rgb(215, 215, 215);
+    cursor: pointer;
+    color: black;
+}
+.rotateIcon{
+    display: none;
+}
+
+@media(max-width: 992px){
+    .rightNav{
+        position: absolute;
+        right: 0;
+        display: none;
+    }
+    .leftNav{
+        position: absolute;
+
+        left: -205px;
+        min-height: 100vh;
+        z-index: 100;
+        transition: all 0.5s;
+        border-right: 1px solid rgb(146, 146, 146);
+    }
+    .leftNav__show{
+        position: absolute;
+        left: 205px;
+        width: 40px;
+        height: 40px;
+        background-color: rgb(228, 228, 228);
+        border: 1px solid rgb(146, 146, 146);
+        border-left: 0;
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+        top: 10%;
+        -ms-transform: translateY(-10%);
+        transform: translateY(-10%);
+        transition: left 0.5s ease;
+        text-align: center;
+        line-height: 36px;
+        }
+        .leftNav__show:hover{
+            cursor:pointer;
+        }
+        .rotateIcon{
+            transition: all 0.2s;
+            transform: rotate(0deg);
+            display: initial;
+        }
+}

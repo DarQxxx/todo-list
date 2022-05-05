@@ -1,0 +1,9 @@
+body{
+    background-color:rgb(243, 243, 243) !important;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.justify-between{
+    justify-content: space-between;
+}

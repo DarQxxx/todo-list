@@ -54,63 +54,29 @@ export const register = (
 ) => {
   firebase
     .auth()
-    .createUserWithEmailAndPassword(email, password)
+    .createUserWithEmailAndPassword(email, password, name, surname)
     .then(userCredential => {
       const userek = userCredential.user
-      
 
-    /*  if (img !== null) {
-        storage
-          .ref(`images/${userek.uid}/${img.name}`)
-          .put(img)
-          .on(
-            'state_changed',
-            snapshot => {},
-            error => {
-              console.log(error)
-            },
-            () => {
-              storage
-                .ref(`images/${userek.uid}`)
-                .child(img.name)
-                .getDownloadURL()
-                .then(url => {
-                  firebase
-                    .firestore()
-                    .collection('users')
-                    .doc(userek.uid)
-                    .set({
-                      email: userek.email,
-                      uid: userek.uid,
-                      url: url,
-                      name: name,
-                      surname: surname
-                    })
-                })
-            }
-          )
-      } else  {
-        storage
-          .ref(`placeholder`)
-          .child('avatar.png')
-          .getDownloadURL()
-          .then(url => {
-            firebase
-              .firestore()
-              .collection('users')
-              .doc(userek.uid)
-              .set({
-                email: userek.email,
-                uid: userek.uid,
-                url: url,
-                name: name,
-                surname: surname
-              })
-          })
-      }
-      setErrorStatus(null)
-    })*/
+      userCredential.user.updateProfile({
+        displayName: `${name} ${surname}`
+      })
 
+
+      firebase
+      .firestore()
+      .collection('users')
+      .doc(userek.uid)
+      .set({
+        email: userek.email,
+        uid: userek.uid,
+        name: `${name} ${surname}`,
+        photo: null
+      })
+
+    firebase
+    .auth()
+    .signOut();
   })
     .catch(error => {
       const errorCode = error.code
@@ -157,4 +123,19 @@ export const getAnything = col => {
 //Tworzenie timestampu, którym sygnujemy wiadomości
 export const time = () => {
   return firebase.firestore.FieldValue.serverTimestamp()
+}
+
+export const updateUser = (name, url) =>{
+  const user = firebase.auth().currentUser;
+  if (name === ""){ name = user.displayName}
+  if (url === ""){ url = user.photoURL}
+
+    user.updateProfile({
+      photoURL: `${url}`,
+      displayName: `${name}`
+
+    }).then((res) => {
+      window.location.reload(true);
+    })
+  
 }

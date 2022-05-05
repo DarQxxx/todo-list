@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    flex:1 ;
 }
 .login{
 width: 600px;
@@ -23,12 +24,15 @@ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     width: 50%;
     margin: auto;
     height: 100%;
+    padding-bottom: 20px;
 }
+
 
 .login__form__title{
     margin: 20px auto 25px auto;
     font-size: 40px;
     font-weight: 600;
+    position: relative;
 }
 
 input{
@@ -55,6 +59,7 @@ color: white;
     color: black;
     font-weight: 600;
     text-decoration: none;
+    padding: 0 20px;
 }
 .log:hover{
     cursor: pointer;
@@ -64,7 +69,23 @@ color: white;
 
 .login__form__credential{
     margin-bottom: 30px;
+    width: 100%;
 }
 .button--marginBot{
     margin-bottom: 30px;
+}
+
+.text--center{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.text--link{
+    text-decoration: none;
+    color:rgb(88, 37, 146)
+}
+
+.text--link:hover{
+    color:rgb(137, 85, 196)
+
 }

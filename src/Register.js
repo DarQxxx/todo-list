@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Log.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, register } from './firebase'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 export default function Register () {
   const dispatch = useDispatch()
@@ -19,12 +19,14 @@ export default function Register () {
   function handleSubmit (e) {
     e.preventDefault()
     register(credientials.email, credientials.password, credientials.name, credientials.surname)
+    
+
   }
   function handleChange (e) {
     setCredientials({ ...credientials, [e.target.id]: e.target.value })
     console.log(credientials);
   }
-  if (userProps.uid === null && isLogged === false) {
+  if (userProps.uid == "0" && isLogged === false ) {
     return (
       <div className='body bg'>
         <div className='container'>
@@ -72,12 +74,14 @@ export default function Register () {
                 onChange={handleChange}
               ></input>
               <button className='button button-login button--marginBot' type='submit'>
-                Log in
+                Sign in
               </button>
+            <div className="text--center">Already got account? Sign in <Link to={'/login'} className="text--link">here</Link></div>
+
             </form>
           </div>
         </div>
       </div>
     )
-  } else return <Navigate to={`/todo/:uid/:date`} />
+  } else return <Navigate to={`/login`} />
 }

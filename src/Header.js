@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate } from 'react-router-dom';
 import { logout } from './firebase';
 import "./header.css"
+import logo from './img/logo.png'
 
 export default function Header() {
   const isLogged = useSelector(state => state.isLogged)
@@ -13,8 +14,7 @@ export default function Header() {
       <div className='container'>
       <div className="header__logo">Logo</div>
       <div className="flex">
-      <Link to={'/contact'} className="log pdr-20">Kontakt</Link>
-      {isLogged ? (<div className="log" onClick={logout}>Wyloguj</div>): (<Link to={`/login`} className="log">Zaloguj</Link>)}
+      {isLogged ? (<Link to={`/login`} className="log" onClick={logout}>Wyloguj</Link>): (<Link to={`/login`} className="log">Zaloguj</Link>)}
       </div>
 
       </div>

@@ -1,7 +1,8 @@
 
 
 .contact{
-width: 600px;
+max-width: 600px;
+min-width: 300px;
 margin: auto;
 background-color: white;
 min-height: 500px;
@@ -59,7 +60,6 @@ input{
 .button{
     border: none;
     outline: none;
-    border-radius: 55px;
     margin: 0 auto;
     padding: 10px 30px;
 }
@@ -79,6 +79,11 @@ input{
     color: red;
     left: 2px;
 }
+
+
+.validate--position{
+    bottom: 11px !important;
+}
 .validate--color{
     color: red;
 }
@@ -87,10 +92,20 @@ input{
     border: 1px solid red !important;
 
 }
+.validate--borderBtm{
+    border-bottom: 1px solid red !important;
+}
 .validate--display{
     display: none;
 }
 
 .pdb-30{
     padding-bottom: 30px;
+}
+
+.contact__form__success{
+    text-align: center;
+    background-color: rgb(176, 255, 176);
+    margin-bottom: 20px;
+    padding: 5px 0;
 }

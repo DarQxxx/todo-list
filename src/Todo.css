@@ -3,8 +3,8 @@
 }
 
 .todo{
-    min-width: 400px;
-    width: 600px;
+    min-width: 300px;
+    max-width: 600px;
     background-color: #000c18;
     min-height: 46vh;
     border-radius: 10px;
@@ -107,4 +107,14 @@
 
 .todo__task__name:hover{
     cursor: pointer;
+}
+.todo__add--height{
+    height: 92px;
+}
+
+.todo__title--nowrap{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 15px 40px;
 }

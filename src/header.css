@@ -5,6 +5,10 @@
 }
 .header{
     user-select: none;
+    background-color: rgb(243, 243, 243);
+}
+.header__logo{
+    padding: 0 20px;
 }
 
 .pdr-20 {

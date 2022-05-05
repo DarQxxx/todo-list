@@ -1,0 +1,25 @@
+.settings{
+max-width: 600px;
+min-width: 300px;
+margin: auto;
+background-color: white;
+min-height: 300px;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.settings__form__title--font{
+    font-size: 30px;
+}
+.settings__form__label{
+    font-size: 12px;
+    padding: 10px 0 5px 0;
+}
+.settings__form__info{
+    font-size: 11px;
+    padding: 0 0 20px 0;
+    text-align: center;
+}
+
+.mb-20{
+    margin-bottom: 20px !important;
+}

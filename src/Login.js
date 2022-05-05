@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Log.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from './firebase';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 export default function Login () {
   const dispatch = useDispatch();
@@ -18,8 +18,7 @@ export default function Login () {
   function handleChange(e){
     setCredientials({ ...credientials, [e.target.id]: e.target.value })
   }
-  console.log(date.fullDate)
-  if (userProps.uid == "0" && isLogged === false ){
+  if (userProps.uid === "0" && isLogged === false || userProps.name === null ){
   return (
     <div className='body bg'>
       <div className='container'>
@@ -45,6 +44,7 @@ export default function Login () {
             <button className='button button-login' type='submit'>
               Log in
             </button>
+            <div className="text--center">No account yet? Sign up <Link to={'/register'} className="text--link">here</Link></div>
           </form>
         </div>
       </div>
@@ -52,5 +52,5 @@ export default function Login () {
   )
 }
 else
-return <Navigate to={`/todo/${userProps.uid}`} />
+return <Navigate to={`/${userProps.uid}`} />
 }
