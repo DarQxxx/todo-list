@@ -98,6 +98,11 @@ input{
 .validate--display{
     display: none;
 }
+.validate__login--text{
+    padding-bottom: 20px;
+    font-size: 13px;
+    text-align: center;
+}
 
 .pdb-30{
     padding-bottom: 30px;

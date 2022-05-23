@@ -49,8 +49,8 @@ export const register = (
   password,
   //img,
   name,
-  surname
-  //setErrorStatus
+  surname,
+  setErrorStatus
 ) => {
   firebase
     .auth()
@@ -83,12 +83,13 @@ export const register = (
       const errorMessage = error.message
       console.log('error code = ' + errorCode)
       console.log('error message = ' + errorMessage)
+      setErrorStatus(true)
     })
 }
 
 
 //Logowanie użytkownika
-export const login = (email, password) => {
+export const login = (email, password, setError) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
@@ -98,6 +99,7 @@ export const login = (email, password) => {
     .catch(error => {
       const errorCode = error.code
       const errorMessage = error.message
+      setError(true)
       console.log('error code = ' + errorCode)
       console.log('error message = ' + errorMessage)
     })
