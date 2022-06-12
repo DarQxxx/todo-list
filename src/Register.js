@@ -11,6 +11,7 @@ export default function Register () {
   const [validation, setValidation] = useState(false)
   const [validationPwd, setValidationPwd] = useState(false)
   const [validationMail, setValidationMail] = useState(false)
+  const [validationLen, setValidationLen] = useState(false)
   const [credientials, setCredientials] = useState({
     name: "",
     surname: "",
@@ -21,17 +22,18 @@ export default function Register () {
 
   function handleSubmit (e) {
     e.preventDefault();
-    if (credientials.name !== "" && credientials.surname !== "" && credientials.email !== "" && credientials.password !== "" && credientials.rpassword !== "" && credientials.password === credientials.rpassword )
+    if (credientials.password.length < 6 && credientials.name !== "" && credientials.surname !== "" && credientials.email !== "" && credientials.password !== "" && credientials.rpassword !== "" ) setValidationLen(true);
+    else if (credientials.name !== "" && credientials.surname !== "" && credientials.email !== "" && credientials.password !== "" && credientials.rpassword !== "" && credientials.password === credientials.rpassword )
     register(credientials.email, credientials.password, credientials.name, credientials.surname, setValidationMail);
-    else if (credientials.password !== credientials.rpassword && credientials.name !== "" && credientials.surname !== "" && credientials.email !== "" && credientials.passwrod !== "" && credientials.rpassword !== "") setValidationPwd(true);
+    else if (credientials.password !== credientials.rpassword && credientials.name !== "" && credientials.surname !== "" && credientials.email !== "" && credientials.password !== "" && credientials.rpassword !== "") setValidationPwd(true);
     else setValidation(true);
-    console.log(credientials.password === credientials.rpassword);
   }
   function handleChange (e) {
     setCredientials({ ...credientials, [e.target.id]: e.target.value })
     setValidation(false);
     setValidationPwd(false);
-    setValidationMail(true);
+    setValidationMail(false);
+    setValidationLen(false);
   }
   if (userProps.uid == "0" && isLogged === false ) {
     return (
@@ -43,6 +45,7 @@ export default function Register () {
               {validation && <div className="validate--color validate__login--text">Podane pola są wymagane</div>}
               {validationPwd && <div className="validate--color validate__login--text">Podane hasła muszą być identyczne</div>}
               {validationMail && <div className="validate--color validate__login--text">Podany email jest już używany</div>}
+              {validationLen && <div className="validate--color validate__login--text">Hasło powinno zawierać co najmniej 6 znaków</div>}
               <input
                 className={`login__form__credential ${(validation === true && credientials.name ==="") && 'validate--borderBtm'}`}
                 type='text'
@@ -68,7 +71,7 @@ export default function Register () {
                 onChange={handleChange}
               ></input>
               <input
-                className={`login__form__credential ${(validation === true && credientials.password ==="") && 'validate--borderBtm'} ${validationPwd === true && 'validate--borderBtm'}`}
+                className={`login__form__credential ${(validation === true && credientials.password ==="") && 'validate--borderBtm'} ${validationPwd === true && 'validate--borderBtm'} ${validationLen === true && 'validate--borderBtm'}` }
                 type='password'
                 name='password'
                 id='password'
@@ -76,7 +79,7 @@ export default function Register () {
                 onChange={handleChange}
               ></input>
               <input
-                className={`login__form__credential ${(validation === true && credientials.rpassword ==="") && 'validate--borderBtm'} ${validationPwd === true && 'validate--borderBtm'}`}
+                className={`login__form__credential ${(validation === true && credientials.rpassword ==="") && 'validate--borderBtm'} ${validationPwd === true && 'validate--borderBtm'} ${validationLen === true && 'validate--borderBtm'}`}
                 type='password'
                 name='rpassword'
                 id='rpassword'

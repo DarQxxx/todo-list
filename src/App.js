@@ -8,6 +8,7 @@ import {
   BrowserRouter as Router,
   Routes as Switch,
   Route,
+  Navigate,
 } from "react-router-dom";
 import Todo from './Todo'
 import Baner from './Header'
@@ -59,6 +60,7 @@ function App () {
       <div className="flex justify-between">      
       <LeftNav/>
         <Switch>
+          <Route path="/" element={<Login/>}/>
           <Route path ="/:uid" element={<Todo/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/settings" element={<Settings/>}/>
